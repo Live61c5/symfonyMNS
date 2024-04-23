@@ -15,13 +15,13 @@ class Author
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     /**
      * @var Collection<int, Book>
      */
-    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'author')]
+    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'authors')]
     private Collection $books;
 
     public function __construct()
@@ -39,7 +39,7 @@ class Author
         return $this->name;
     }
 
-    public function setName(?string $name): static
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -58,7 +58,7 @@ class Author
     {
         if (!$this->books->contains($book)) {
             $this->books->add($book);
-            $book->setAuthor($this);
+            $book->setAuthors($this);
         }
 
         return $this;
@@ -68,8 +68,8 @@ class Author
     {
         if ($this->books->removeElement($book)) {
             // set the owning side to null (unless already changed)
-            if ($book->getAuthor() === $this) {
-                $book->setAuthor(null);
+            if ($book->getAuthors() === $this) {
+                $book->setAuthors(null);
             }
         }
 

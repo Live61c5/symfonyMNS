@@ -9,7 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Author</th>
                 <th>Name</th>
+                <th>Genre</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,7 +19,9 @@
         {% for book in books %}
             <tr>
                 <td>{{ book.id }}</td>
+                <td>{{ book.authors.name }}</td>
                 <td>{{ book.name }}</td>
+                <td>{{ book.genres.name }}</td>
                 <td>
                     <a href="{{ path('app_book_show', {'id': book.id}) }}">show</a>
                     <a href="{{ path('app_book_edit', {'id': book.id}) }}">edit</a>

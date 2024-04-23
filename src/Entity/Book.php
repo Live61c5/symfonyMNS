@@ -13,14 +13,14 @@ class Book
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
-    private ?Author $author = null;
+    private ?Genre $genres = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
-    private ?Genre $genres = null;
+    private ?Author $authors = null;
 
     public function getId(): ?int
     {
@@ -32,21 +32,9 @@ class Book
         return $this->name;
     }
 
-    public function setName(?string $name): static
+    public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?Author
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?Author $author): static
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -59,6 +47,18 @@ class Book
     public function setGenres(?Genre $genres): static
     {
         $this->genres = $genres;
+
+        return $this;
+    }
+
+    public function getAuthors(): ?Author
+    {
+        return $this->authors;
+    }
+
+    public function setAuthors(?Author $authors): static
+    {
+        $this->authors = $authors;
 
         return $this;
     }

@@ -16,15 +16,13 @@ class BookType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('author', EntityType::class, [
-                'class' => Author::class,
-                'choice_label' => 'id',
-            ])
             ->add('genres', EntityType::class, [
                 'class' => Genre::class,
                 'choice_label' => 'id',
-                'multiple' => true,
-                'expanded' => true,
+            ])
+            ->add('authors', EntityType::class, [
+                'class' => Author::class,
+                'choice_label' => 'id',
             ])
         ;
     }
